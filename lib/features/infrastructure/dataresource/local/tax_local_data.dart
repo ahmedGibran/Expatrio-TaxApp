@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:expatrio_tax_task/core/core.dart';
 import 'package:expatrio_tax_task/features/features.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -20,7 +21,7 @@ class TaxLocalDataImpl extends TaxLocalData {
     try {
       await storage.write(
         key: CACHED_TAX_DATA,
-        value: tax.toString(),
+        value: (tax as TaxModel).toJson().toString(),
       );
     } catch (_) {
       throw CacheException();
@@ -28,8 +29,17 @@ class TaxLocalDataImpl extends TaxLocalData {
   }
 
   @override
-  Future<Tax?> getTaxData() {
-    // TODO: implement getTaxData
-    throw UnimplementedError();
+  Future<Tax?> getTaxData() async {
+    Tax? tax;
+    try {
+      final value = await storage.read(key: CACHED_TAX_DATA);
+      if (value != null) {
+        final jsonData = json.decode(value);
+        tax = TaxModel.fromJson(jsonData);
+      }
+    } catch (_) {
+      throw CacheException();
+    }
+    return tax;
   }
 }
