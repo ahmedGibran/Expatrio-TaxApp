@@ -4,7 +4,7 @@ import 'entities.dart';
 class User extends Equatable {
   final int userId;
   final String accessToken;
-  final DateTime accessTokenExpiresAt;
+  final DateTime? accessTokenExpiresAt;
   final String userRole;
   final bool xpm;
   final UserSubject subject;

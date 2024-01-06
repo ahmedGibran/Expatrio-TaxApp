@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 
 class W9File extends Equatable {
   final int id;
-  final DateTime createdAt;
-  final DateTime modifiedAt;
+  final DateTime? createdAt;
+  final DateTime? modifiedAt;
   final String fileName;
   final String? author;
   final String? state;
