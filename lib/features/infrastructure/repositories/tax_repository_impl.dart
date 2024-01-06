@@ -13,7 +13,27 @@ class TaxRepositoryImpl extends TaxRepository {
   });
 
   @override
-  Future<Either<Failure, Tax>>? getTaxData() {}
+  Future<Either<Failure, Tax>>? getTaxData() async {
+    final bool isConnected = await networkInfo.isConnected;
+    if (isConnected) {
+      try {
+        final Tax? tax = await taxRemoteData.getTaxData();
+        if (tax != null) {
+          await taxLocalData.cacheTaxData(tax);
+        }
+        return right(tax!);
+      } on ServerException {
+        return left(const ServerFailure(message: 'Internal Server Error'));
+      }
+    } else {
+      try {
+        final Tax? tax = await taxLocalData.getTaxData();
+        return right(tax!);
+      } on CacheException {
+        return left(const CacheFailure(message: 'Internal Cache Error'));
+      }
+    }
+  }
 
   @override
   Future<Either<Failure, void>>? updateTaxData(Tax tax) {}
