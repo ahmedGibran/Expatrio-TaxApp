@@ -38,11 +38,11 @@ class TaxModel extends Tax {
 
   Map<String, dynamic> toJson() {
     return {
-      "usTaxId": usTaxId,
-      "usPerson": usPerson,
-      "primaryTaxResidence": primaryTaxResidence,
-      "secondaryTaxResidence": secondaryTaxResidence,
-      "w9FileId": w9FileId,
+      'usTaxId': usTaxId,
+      'usPerson': usPerson,
+      'primaryTaxResidence': primaryTaxResidence,
+      'secondaryTaxResidence': secondaryTaxResidence,
+      'w9FileId': w9FileId,
     };
   }
 }

@@ -32,12 +32,12 @@ class UserModel extends User {
 
   Map<String, dynamic> toJson() {
     return {
-      "userId": userId,
-      "accessToken": accessToken,
-      "accessTokenExpiresAt": accessTokenExpiresAt?.toIso8601String(),
-      "userRole": userRole,
-      "xpm": xpm,
-      "maxAgeSeconds": maxAgeSeconds,
+      'userId': userId,
+      'accessToken': accessToken,
+      'accessTokenExpiresAt': accessTokenExpiresAt?.toIso8601String(),
+      'userRole': userRole,
+      'xpm': xpm,
+      'maxAgeSeconds': maxAgeSeconds,
     };
   }
 }

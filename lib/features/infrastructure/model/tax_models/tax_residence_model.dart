@@ -9,6 +9,6 @@ class TaxResidenceModel extends TaxResidence {
   }
 
   Map<String, dynamic> toJson() {
-    return {"id": id, "country": country};
+    return {'id': id, 'country': country};
   }
 }

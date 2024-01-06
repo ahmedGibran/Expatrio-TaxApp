@@ -36,14 +36,14 @@ class UserSubjectModel extends UserSubject {
 
   Map<String, dynamic> toJson() {
     return {
-      "userId": userId,
-      "userUuid": userUuid,
-      "firstName": firstName,
-      "lastName": lastName,
-      "fullName": fullName,
-      "email": email,
-      "role": role,
-      "isAdmin": isAdmin,
+      'userId': userId,
+      'userUuid': userUuid,
+      'firstName': firstName,
+      'lastName': lastName,
+      'fullName': fullName,
+      'email': email,
+      'role': role,
+      'isAdmin': isAdmin,
     };
   }
 }
