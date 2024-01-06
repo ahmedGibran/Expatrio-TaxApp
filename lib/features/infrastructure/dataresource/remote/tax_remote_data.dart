@@ -12,6 +12,7 @@ abstract class TaxRemoteData {
 class TaxRemoteDataImpl extends TaxRemoteData {
   final http.Client httpClient;
   TaxRemoteDataImpl({required this.httpClient});
+
   @override
   Future<Tax?> getTaxData() async {
     Tax? tax;
@@ -30,8 +31,19 @@ class TaxRemoteDataImpl extends TaxRemoteData {
   }
 
   @override
-  Future<void> updateTaxData(Tax tax) {
-    // TODO: implement updateTaxData
-    throw UnimplementedError();
+  Future<void> updateTaxData(Tax tax) async {
+    TaxModel? taxModel = tax as TaxModel;
+    final response = await httpClient.put(
+      Uri.parse(Constant().endPoint('v3/customers/:id/tax-data')),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+      },
+      body: json.encode(taxModel.toJson()),
+    );
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      throw ServerException();
+    }
   }
 }

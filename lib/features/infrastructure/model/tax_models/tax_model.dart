@@ -40,8 +40,12 @@ class TaxModel extends Tax {
     return {
       'usTaxId': usTaxId,
       'usPerson': usPerson,
-      'primaryTaxResidence': primaryTaxResidence,
-      'secondaryTaxResidence': secondaryTaxResidence,
+      'primaryTaxResidence':
+          (primaryTaxResidence as TaxResidenceModel).toJson(),
+      'secondaryTaxResidence': [
+        for (var taxResidenceItem in secondaryTaxResidence)
+          (taxResidenceItem as TaxResidenceModel).toJson(),
+      ],
       'w9FileId': w9FileId,
     };
   }
