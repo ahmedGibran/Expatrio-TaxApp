@@ -23,18 +23,29 @@ class TaxRepositoryImpl extends TaxRepository {
         }
         return right(tax!);
       } on ServerException {
-        return left(const ServerFailure(message: 'Internal Server Error'));
+        return left(const ServerFailure(
+            message: 'Internal Server Error while getTaxData'));
       }
     } else {
       try {
         final Tax? tax = await taxLocalData.getTaxData();
         return right(tax!);
       } on CacheException {
-        return left(const CacheFailure(message: 'Internal Cache Error'));
+        return left(const CacheFailure(
+            message: 'Internal Cache Error while getTaxData'));
       }
     }
   }
 
   @override
-  Future<Either<Failure, void>>? updateTaxData(Tax tax) {}
+  Future<Either<Failure, void>>? updateTaxData(Tax tax) async {
+    try {
+      await taxRemoteData.updateTaxData(tax);
+      await taxLocalData.cacheTaxData(tax);
+      return right(null);
+    } on ServerException {
+      return left(const ServerFailure(
+          message: 'Internal Server Error while updateTaxData'));
+    }
+  }
 }
