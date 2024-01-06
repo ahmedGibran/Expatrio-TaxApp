@@ -2,12 +2,12 @@ import 'package:expatrio_tax_task/features/features.dart';
 
 class TaxModel extends Tax {
   const TaxModel({
-    required String usTaxId,
-    required bool usPerson,
+    required String? usTaxId,
+    required bool? usPerson,
     required TaxResidence primaryTaxResidence,
     required List<TaxResidence> secondaryTaxResidence,
-    required int w9FileId,
-    required W9File w9File,
+    required int? w9FileId,
+    required W9File? w9File,
   }) : super(
           usTaxId: usTaxId,
           usPerson: usPerson,

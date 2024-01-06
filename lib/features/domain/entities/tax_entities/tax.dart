@@ -2,12 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:expatrio_tax_task/features/domain/entities/entities.dart';
 
 class Tax extends Equatable {
-  final String usTaxId;
-  final bool usPerson;
+  final String? usTaxId;
+  final bool? usPerson;
   final TaxResidence primaryTaxResidence;
   final List<TaxResidence> secondaryTaxResidence;
-  final int w9FileId;
-  final W9File w9File;
+  final int? w9FileId;
+  final W9File? w9File;
 
   const Tax({
     required this.usTaxId,
