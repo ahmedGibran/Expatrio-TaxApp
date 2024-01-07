@@ -37,7 +37,7 @@ void main() {
       ),
       maxAgeSeconds: 3600);
 
-  test('should be check the login function passed with right return', () async {
+  test('should the check of the login function passed with right return', () async {
     when(mockAuthRepository.login('email@email.com', 'password'))
         .thenAnswer((_) async => Right(user));
 
@@ -48,7 +48,7 @@ void main() {
     verifyNoMoreInteractions(mockAuthRepository);
   });
 
-  test('should be check the login function fail with left return', () async {
+  test('should the check of the login function fail with left return', () async {
     when(mockAuthRepository.login('email', 'password'))
         .thenAnswer((_) async => const Left(Failure(message: 'fails')));
 
