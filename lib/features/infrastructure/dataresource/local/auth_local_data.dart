@@ -21,7 +21,7 @@ class AuthLocalDataImpl extends AuthLocalData {
     try {
       await storage.write(
         key: CACHED_USER_DATA,
-        value: (user as UserModel).toJson().toString(),
+        value: jsonEncode((user as UserModel).toJson()),
       );
     } catch (_) {
       throw CacheException();

@@ -21,7 +21,7 @@ class TaxLocalDataImpl extends TaxLocalData {
     try {
       await storage.write(
         key: CACHED_TAX_DATA,
-        value: (tax as TaxModel).toJson().toString(),
+        value: jsonEncode((tax as TaxModel).toJson()),
       );
     } catch (_) {
       throw CacheException();
