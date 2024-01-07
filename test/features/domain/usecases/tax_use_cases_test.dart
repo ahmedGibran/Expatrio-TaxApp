@@ -53,8 +53,7 @@ void main() {
     verifyNoMoreInteractions(mockTaxRepository);
   });
 
-  test('should the check of the getTaxData fail with left return',
-      () async {
+  test('should the check of the getTaxData fail with left return', () async {
     when(mockTaxRepository.getTaxData())
         .thenAnswer((_) async => const Left(Failure(message: 'fails')));
 
