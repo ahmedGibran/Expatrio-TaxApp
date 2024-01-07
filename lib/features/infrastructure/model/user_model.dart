@@ -37,6 +37,7 @@ class UserModel extends User {
       'accessTokenExpiresAt': accessTokenExpiresAt?.toIso8601String(),
       'userRole': userRole,
       'xpm': xpm,
+      'subject': (subject as UserSubjectModel).toJson(),
       'maxAgeSeconds': maxAgeSeconds,
     };
   }
