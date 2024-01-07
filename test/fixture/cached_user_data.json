@@ -12,8 +12,7 @@
     "fullName": "Bobon Ba Cba Aion",
     "email": "tito+bs792@expatrio.com",
     "role": "CUSTOMER",
-    "isAdmin": false,
-    "consoleRoles": []
+    "isAdmin": false
   },
   "maxAgeSeconds": 3600
 }
