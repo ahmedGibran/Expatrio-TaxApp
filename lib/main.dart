@@ -2,6 +2,7 @@ import 'package:expatrio_tax_task/core/core.dart';
 import 'package:expatrio_tax_task/features/features.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   initDIC();
@@ -22,22 +23,28 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
+        localizationsDelegates: const [
+          // custom delegate for specific lang
+          AppLocalization.delegate,
+          // provides localized strings and other values for the Material Components library.
+          GlobalMaterialLocalizations.delegate,
+          // defines the default text direction, either left-to-right or right-to-left, for the widgets library.
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en', 'US'), // English, USA country code
+          Locale('de', 'DE'), // German
+        ],
+        localeResolutionCallback: (deviceLocal, supportedLocales) {
+          for (var locale in supportedLocales) {
+            if (locale.languageCode == deviceLocal?.languageCode &&
+                locale.countryCode == deviceLocal?.countryCode) {
+              return locale;
+            }
+          }
+          return supportedLocales.first;
+        },
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // TRY THIS: Try running your application with "flutter run". You'll see
-          // the application has a purple toolbar. Then, without quitting the app,
-          // try changing the seedColor in the colorScheme below to Colors.green
-          // and then invoke "hot reload" (save your changes or press the "hot
-          // reload" button in a Flutter-supported IDE, or press "r" if you used
-          // the command line to start the app).
-          //
-          // Notice that the counter didn't reset back to zero; the application
-          // state is not lost during the reload. To reset the state, use hot
-          // restart instead.
-          //
-          // This works for code too, not just values: Most code changes can be
-          // tested with just a hot reload.
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
