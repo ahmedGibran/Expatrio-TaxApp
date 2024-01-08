@@ -2,10 +2,13 @@ import 'package:expatrio_tax_task/core/core.dart';
 import 'package:expatrio_tax_task/features/features.dart';
 import 'package:flutter/material.dart';
 
+enum AuthProviderState { init, loading, error, success }
+
 class AuthState extends ChangeNotifier {
   late final TextEditingController _emailTextController;
   late final TextEditingController _passwordTextController;
   final AuthUseCases authUseCases;
+  AuthProviderState _state = AuthProviderState.init;
 
   String _email = '';
   String _password = '';
@@ -15,6 +18,8 @@ class AuthState extends ChangeNotifier {
 
   TextEditingController get emailTextController => _emailTextController;
   TextEditingController get passwordTextController => _passwordTextController;
+  AuthProviderState get state => _state;
+
   bool get isSubmitEnabled =>
       !Helper.isEmpty(email) &&
       Helper.validateEmail(email) &&
@@ -29,8 +34,14 @@ class AuthState extends ChangeNotifier {
   }
 
   Future<void> login() async {
+    _state = AuthProviderState.loading;
+    notifyListeners();
     final result = await authUseCases.login(_email, _password);
-    result?.fold((l) {}, (r) => {});
+    result?.fold((l) {
+      _state = AuthProviderState.error;
+    }, (r) {
+      _state = AuthProviderState.success;
+    });
     notifyListeners();
   }
 
