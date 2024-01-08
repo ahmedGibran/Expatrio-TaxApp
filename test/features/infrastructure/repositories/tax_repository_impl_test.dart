@@ -84,7 +84,6 @@ void main() {
   group("TaxRepositoryImpl test group when device is offline", () {
     setUpAll(() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
-      // when(mockTaxRemoteData.updateTaxData(tax)).thenAnswer((_) async => Left);
       when(mockTaxLocalData.getTaxData()).thenAnswer((_) async => tax);
       when(mockTaxLocalData.cacheTaxData(tax))
           .thenAnswer((_) async => returnsNormally);
