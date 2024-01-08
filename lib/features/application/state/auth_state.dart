@@ -18,7 +18,8 @@ class AuthState extends ChangeNotifier {
   bool get isSubmitEnabled =>
       !Helper.isEmpty(email) &&
       Helper.validateEmail(email) &&
-      !Helper.isEmpty(password);
+      !Helper.isEmpty(password) &&
+      Helper.validatePassword(password);
 
   AuthState({required this.authUseCases}) {
     _emailTextController = TextEditingController();

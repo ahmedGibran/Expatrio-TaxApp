@@ -30,7 +30,7 @@ class Helper {
     return false;
   }
 
-  static bool passwordValidation(String? value) {
+  static bool validatePassword(String? value) {
     if (value == null || value.isEmpty || value.length < 8) {
       return false;
     }
