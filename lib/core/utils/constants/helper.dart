@@ -1,4 +1,4 @@
-class Helper{
+class Helper {
   /// Email validation
   static bool validateEmail(String? value) {
     RegExp regex = RegExp(
@@ -14,4 +14,19 @@ class Helper{
     }
   }
 
+  static String? validateNotEmpty(String? value) {
+    String? validateText;
+    if (value == null || value.trim().isEmpty) {
+      validateText = 'validation error';
+    }
+    return validateText;
+  }
+
+  static bool isEmpty(Object? object) {
+    if (object == null) return true;
+    if (object is String) return object.isEmpty;
+    if (object is List) return object.isEmpty;
+    if (object is Map) return object.isEmpty;
+    return false;
+  }
 }
