@@ -29,4 +29,11 @@ class Helper {
     if (object is Map) return object.isEmpty;
     return false;
   }
+
+  static bool passwordValidation(String? value) {
+    if (value == null || value.isEmpty || value.length < 8) {
+      return false;
+    }
+    return true;
+  }
 }
