@@ -1,6 +1,8 @@
+import 'package:expatrio_tax_task/core/core.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  initDIC();
   runApp(const MyApp());
 }
 
