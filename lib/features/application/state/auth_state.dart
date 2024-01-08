@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class AuthState extends ChangeNotifier {
   late final TextEditingController _emailTextController;
   late final TextEditingController _passwordTextController;
-
   final AuthUseCases authUseCases;
 
   String _email = '';
