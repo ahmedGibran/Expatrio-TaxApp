@@ -1,3 +1,4 @@
+import 'package:expatrio_tax_task/core/core.dart';
 import 'package:expatrio_tax_task/features/features.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,10 @@ class AuthState extends ChangeNotifier {
 
   TextEditingController get emailTextController => _emailTextController;
   TextEditingController get passwordTextController => _passwordTextController;
+  bool get isSubmitEnabled =>
+      !Helper.isEmpty(email) &&
+      Helper.validateEmail(email) &&
+      !Helper.isEmpty(password);
 
   AuthState({required this.authUseCases}) {
     _emailTextController = TextEditingController();
