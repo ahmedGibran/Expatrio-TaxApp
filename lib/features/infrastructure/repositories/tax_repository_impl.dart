@@ -39,13 +39,18 @@ class TaxRepositoryImpl extends TaxRepository {
 
   @override
   Future<Either<Failure, void>>? updateTaxData(Tax tax) async {
-    try {
-      await taxRemoteData.updateTaxData(tax);
-      await taxLocalData.cacheTaxData(tax);
-      return right(null);
-    } on ServerException {
-      return left(const ServerFailure(
-          message: 'Internal Server Error while updateTaxData'));
+    final bool isConnected = await networkInfo.isConnected;
+    if (isConnected) {
+      try {
+        await taxRemoteData.updateTaxData(tax);
+        await taxLocalData.cacheTaxData(tax);
+        return right(null);
+      } on ServerException {
+        return left(const ServerFailure(
+            message: 'Internal Server Error while updateTaxData'));
+      }
+    } else {
+      return left(const ServerFailure(message: 'No internet connection'));
     }
   }
 }
