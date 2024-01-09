@@ -20,7 +20,6 @@ class AuthRemoteDataImpl extends AuthRemoteData {
       headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
       body: json.encode(<String, String>{'email': email, 'password': password}),
     );
-    print("response: ${response}");
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);

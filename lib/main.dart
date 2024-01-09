@@ -20,6 +20,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => getIt<AuthState>(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<TaxState>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
