@@ -2,6 +2,8 @@
   "login": "Login",
   "help": "Help",
   "save": "Save",
+  "remove": "Remove",
+  "add_another": "Add Another",
   "trying_to_login_note": "Trying to Login...",
   "email_label": "Email Address",
   "password_label": "Password",
