@@ -77,6 +77,7 @@ flutter:
     - assets/2019_XP_logo_white.png
     - assets/login-background.json
     - assets/CryingGirl.svg
+    - lib/core/localization/lang/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
