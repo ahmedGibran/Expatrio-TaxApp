@@ -9,21 +9,26 @@ final getIt = GetIt.instance;
 void initDIC() {
   //state
   getIt.registerFactory(() => AuthState(authUseCases: getIt()));
+  getIt.registerFactory(() => TaxState(taxUseCases: getIt()));
 
   //use cases
   getIt.registerLazySingleton(() => AuthUseCases(authRepository: getIt()));
+  getIt.registerLazySingleton(() => TaxUseCases(taxRepository: getIt()));
 
   //repositories
-  getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
-      networkInfo: getIt(), authRemoteData: getIt(), authLocalData: getIt()));
+  getIt.registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(networkInfo: getIt(), authRemoteData: getIt(), authLocalData: getIt()));
+  getIt.registerLazySingleton<TaxRepository>(
+      () => TaxRepositoryImpl(networkInfo: getIt(), taxRemoteData: getIt(), taxLocalData: getIt()));
 
   //data resource
   getIt.registerLazySingleton<AuthRemoteData>(() => AuthRemoteDataImpl(httpClient: getIt()));
   getIt.registerLazySingleton<AuthLocalData>(() => AuthLocalDataImpl(storage: getIt()));
+  getIt.registerLazySingleton<TaxRemoteData>(() => TaxRemoteDataImpl(httpClient: getIt()));
+  getIt.registerLazySingleton<TaxLocalData>(() => TaxLocalDataImpl(storage: getIt()));
 
   //core
-  getIt.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImpl(internetConnectionChecker: getIt()));
+  getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(internetConnectionChecker: getIt()));
 
   //External
   getIt.registerLazySingleton(() => const FlutterSecureStorage(
