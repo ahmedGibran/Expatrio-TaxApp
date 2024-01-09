@@ -12,9 +12,11 @@ class AuthState extends ChangeNotifier {
 
   String _email = '';
   String _password = '';
+  bool _passwordVisible = false;
 
   String get email => _email;
   String get password => _password;
+  bool get passwordVisible => _passwordVisible;
 
   TextEditingController get emailTextController => _emailTextController;
   TextEditingController get passwordTextController => _passwordTextController;
@@ -22,13 +24,13 @@ class AuthState extends ChangeNotifier {
 
   bool get isSubmitEnabled =>
       !Helper.isEmpty(email) &&
-      Helper.validateEmail(email) &&
+      Helper.validateEmail(email) == null &&
       !Helper.isEmpty(password) &&
-      Helper.validatePassword(password);
+      Helper.validatePassword(password) == null;
 
   AuthState({required this.authUseCases}) {
-    _emailTextController = TextEditingController();
-    _passwordTextController = TextEditingController();
+    _emailTextController = TextEditingController(text: 'tito+bs792@expatrio.com');
+    _passwordTextController = TextEditingController(text: 'nemampojma');
     _emailTextController.addListener(_listenToEmailTextChange);
     _passwordTextController.addListener(_listenToPasswordTextChange);
   }
@@ -38,10 +40,17 @@ class AuthState extends ChangeNotifier {
     notifyListeners();
     final result = await authUseCases.login(_email, _password);
     result?.fold((l) {
+      print("left: ${l}");
       _state = AuthProviderState.error;
     }, (r) {
+      print("r: ${r}");
       _state = AuthProviderState.success;
     });
+    notifyListeners();
+  }
+
+  void setPasswordVisible(bool visible) {
+    _passwordVisible = visible;
     notifyListeners();
   }
 

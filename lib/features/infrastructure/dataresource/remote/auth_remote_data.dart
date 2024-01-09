@@ -17,11 +17,10 @@ class AuthRemoteDataImpl extends AuthRemoteData {
     User? user;
     final response = await httpClient.post(
       Uri.parse(Constant().endPoint('auth/login')),
-      headers: {
-        HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-      },
+      headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
       body: json.encode(<String, String>{'email': email, 'password': password}),
     );
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       user = UserModel.fromJson(data);

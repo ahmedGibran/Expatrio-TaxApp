@@ -1,5 +1,5 @@
 class Constant {
-  static const _uRL = "";
+  static const _uRL = "https://dev-api.expatrio.com/";
   String endPoint(String endPoint) {
     late String url;
     if (endPoint.isNotEmpty) {

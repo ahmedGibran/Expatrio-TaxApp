@@ -1,15 +1,17 @@
 class Helper {
   /// Email validation
-  static bool validateEmail(String? value) {
+  static String? validateEmail(String? value) {
+    String? validateText;
     RegExp regex = RegExp(
         r'^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
     if (value == null || value.isEmpty) {
-      return false;
+      validateText = 'Email validation error';
     } else {
       if (!regex.hasMatch(value)) {
-        return false;
+        print("validateText : ${validateText}");
+        validateText = 'Email validation error';
       } else {
-        return true;
+        return null;
       }
     }
   }
@@ -30,10 +32,11 @@ class Helper {
     return false;
   }
 
-  static bool validatePassword(String? value) {
+  static String? validatePassword(String? value) {
+    String? validateText;
     if (value == null || value.isEmpty || value.length < 8) {
-      return false;
+      validateText = 'Password validation error';
     }
-    return true;
+    return validateText;
   }
 }

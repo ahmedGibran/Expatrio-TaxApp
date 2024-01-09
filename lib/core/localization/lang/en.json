@@ -1,0 +1,11 @@
+{
+  "login": "Login",
+  "help": "Help",
+  "trying_to_login_note": "Trying to Login...",
+  "email_label": "Email Address",
+  "password_label": "Password",
+  "successful_login_title": "Successful Login",
+  "successful_login__subtitle": "You will be redirected to your dashboard",
+  "got_it__action": "Got it"
+
+}
