@@ -161,6 +161,10 @@ class LoginScreen extends StatelessWidget {
                                                       ),
                                                       onPressed: () async {
                                                         Navigator.pop(context);
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(builder: (context) => const TaxScreen()),
+                                                        );
                                                       },
                                                       child: Container(
                                                         height: 24,

@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:expatrio_tax_task/core/utils/constants/countries_constants.dart';
 import 'package:expatrio_tax_task/features/features.dart';
 import 'package:flutter/material.dart';
 
@@ -55,5 +56,9 @@ class TaxState extends ChangeNotifier {
       _state = TaxProviderState.success;
     });
     notifyListeners();
+  }
+
+  void selectTaxCountry(CountryInfo countryInfo, int formIndex) {
+    print("CountryInfo $countryInfo, formIndex: $formIndex");
   }
 }
