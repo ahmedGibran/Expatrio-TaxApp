@@ -14,15 +14,15 @@ void initDIC() {
   getIt.registerLazySingleton(() => AuthUseCases(authRepository: getIt()));
 
   //repositories
-  getIt.registerLazySingleton(() => AuthRepositoryImpl(
+  getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
       networkInfo: getIt(), authRemoteData: getIt(), authLocalData: getIt()));
 
   //data resource
-  getIt.registerLazySingleton(() => AuthRemoteDataImpl(httpClient: getIt()));
-  getIt.registerLazySingleton(() => AuthLocalDataImpl(storage: getIt()));
+  getIt.registerLazySingleton<AuthRemoteData>(() => AuthRemoteDataImpl(httpClient: getIt()));
+  getIt.registerLazySingleton<AuthLocalData>(() => AuthLocalDataImpl(storage: getIt()));
 
   //core
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(internetConnectionChecker: getIt()));
 
   //External

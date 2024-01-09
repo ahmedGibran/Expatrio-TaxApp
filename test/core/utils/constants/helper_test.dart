@@ -6,30 +6,30 @@ void main(){
   group('Helper - Validators', () {
     test('validateEmail', () {
       var validation = Helper.validateEmail('');
-      expect(validation, false, reason: 'validateEmail empty should pass');
+      expect(validation, isNotNull, reason: 'validateEmail empty should pass');
 
       validation = Helper.validateEmail(null);
-      expect(validation, false, reason: 'validateEmail on null should pass');
+      expect(validation, isNotNull, reason: 'validateEmail on null should pass');
 
       validation = Helper.validateEmail('abs.com');
-      expect(validation, false, reason: 'validateEmail with wrong format should pass');
+      expect(validation, isNotNull, reason: 'validateEmail with wrong format should pass');
 
-      validation = Helper.validatePassword('abs2@email.com');
-      expect(validation, true, reason: 'validateEmail with correct format should pass');
+      validation = Helper.validateEmail('abs2@email.com');
+      expect(validation, isNull, reason: 'validateEmail with correct format should pass');
     });
 
     test('validatePassword', () {
       var validation = Helper.validatePassword('');
-      expect(validation, false, reason: 'validatePassword empty should pass');
+      expect(validation, isNotNull, reason: 'validatePassword empty should pass');
 
       validation = Helper.validatePassword(null);
-      expect(validation, false, reason: 'validatePassword on null should pass');
+      expect(validation, isNotNull, reason: 'validatePassword on null should pass');
 
       validation = Helper.validatePassword('1234');
-      expect(validation, false, reason: 'validatePassword with less than 8 letters should pass');
+      expect(validation, isNotNull, reason: 'validatePassword with less than 8 letters should pass');
 
       validation = Helper.validatePassword('12345678');
-      expect(validation, true, reason: 'validatePassword with 8 or more letters should pass');
+      expect(validation, isNull, reason: 'validatePassword with 8 or more letters should pass');
     });
 
     test('validateNotEmpty', () {
