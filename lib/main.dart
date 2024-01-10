@@ -50,7 +50,9 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.light,
             textSelectionTheme: const TextSelectionThemeData()
                 .copyWith(selectionColor: Theme.of(context).colors.primary.withOpacity(0.2)),
-            inputDecorationTheme: const InputDecorationTheme().copyWith(focusColor: Theme.of(context).colors.primary)),
+            inputDecorationTheme: const InputDecorationTheme().copyWith(focusColor: Theme.of(context).colors.primary),
+
+        ),
         home: const LoginScreen(),
       ),
     );

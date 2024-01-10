@@ -14,6 +14,7 @@ void initDIC() {
   //use cases
   getIt.registerLazySingleton(() => AuthUseCases(authRepository: getIt()));
   getIt.registerLazySingleton(() => TaxUseCases(taxRepository: getIt()));
+  getIt.registerSingleton<AuthModel>(AuthModel());
 
   //repositories
   getIt.registerLazySingleton<AuthRepository>(
