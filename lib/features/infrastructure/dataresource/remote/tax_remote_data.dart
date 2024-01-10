@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:expatrio_tax_task/core/core.dart';
 import 'package:expatrio_tax_task/features/features.dart';
 import 'package:http/http.dart' as http;
@@ -16,11 +15,8 @@ class TaxRemoteDataImpl extends TaxRemoteData {
   @override
   Future<Tax?> getTaxData() async {
     Tax? tax;
-    final response = await httpClient.get(
-        Uri.parse(Constant().endPoint('v3/customers/:id/tax-data')),
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
-        });
+    final response = await httpClient.get(Uri.parse(Constant().endPoint('v3/customers/:id/tax-data')),
+        headers: Constant().getHttpClientHeader());
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       tax = TaxModel.fromJson(data);
@@ -32,13 +28,10 @@ class TaxRemoteDataImpl extends TaxRemoteData {
 
   @override
   Future<void> updateTaxData(Tax tax) async {
-    TaxModel? taxModel = tax as TaxModel;
     final response = await httpClient.put(
       Uri.parse(Constant().endPoint('v3/customers/:id/tax-data')),
-      headers: {
-        HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
-      },
-      body: json.encode(taxModel.toJson()),
+      headers: Constant().getHttpClientHeader(),
+      body: json.encode((tax as TaxModel).toJson()),
     );
     if (response.statusCode == 200) {
       return;

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:expatrio_tax_task/core/utils/constants/countries_constants.dart';
 import 'package:expatrio_tax_task/features/features.dart';
 import 'package:flutter/material.dart';
@@ -7,38 +5,25 @@ import 'package:flutter/material.dart';
 enum TaxProviderState { init, loading, error, success }
 
 class TaxState extends ChangeNotifier {
-  late final TextEditingController _countryTextController;
-  late final TextEditingController _taxIDTextController;
-
   late final TaxUseCases taxUseCases;
-  TaxResidence? _primaryTaxResidence;
-  List<TaxResidence> _secondryTaxResidences = [];
   Map<int, TaxResidence> _taxResidencesMap = {};
-  List<int> _taxForms = [];
+  final List<int> _taxForms = [];
   TaxProviderState _state = TaxProviderState.init;
   bool _isSubmitButtonEnabled = false;
-
-  String _selectedTaxCountry = '';
-  String _taxId = '';
+  bool? _isInformationAccuracyVerified;
 
   List<CountryInfo> _countryInfos = [];
 
-  TextEditingController get countryTextController => _countryTextController;
-  TextEditingController get taxIDTextController => _taxIDTextController;
-
-  TaxResidence? get primaryTaxResidence => _primaryTaxResidence;
-  List<TaxResidence> get secondryTaxResidences => _secondryTaxResidences;
   Map<int, TaxResidence> get taxResidencesMap => _taxResidencesMap;
   TaxProviderState get state => _state;
   bool get isSubmitButtonEnabled => _isSubmitButtonEnabled;
+  bool? get isInformationAccuracyVerified => _isInformationAccuracyVerified;
   List<CountryInfo> get countryInfos => _countryInfos;
   List<int> get taxForms => _taxForms;
 
   TaxState({required this.taxUseCases}) {
-    _countryTextController = TextEditingController();
-    _taxIDTextController = TextEditingController();
     _countryInfos = [...CountriesConstants.countryInfos];
-    _taxForms.add(1);
+    _taxForms.add(0);
     _getTaxData();
   }
 
@@ -51,8 +36,11 @@ class TaxState extends ChangeNotifier {
       _state = TaxProviderState.error;
     }, (r) {
       _state = TaxProviderState.success;
-      _primaryTaxResidence = r.primaryTaxResidence;
-      _secondryTaxResidences = r.secondaryTaxResidence;
+      _taxResidencesMap[0] = r.primaryTaxResidence;
+      for (int i = 0; i < r.secondaryTaxResidence.length; i++) {
+        _taxForms.add(i + 1);
+        _taxResidencesMap[i + 1] = r.secondaryTaxResidence[i];
+      }
     });
     notifyListeners();
   }
@@ -71,7 +59,6 @@ class TaxState extends ChangeNotifier {
   }
 
   void selectTaxCountry(CountryInfo countryInfo, int formIndex) {
-    print("CountryInfo $countryInfo, formIndex: $formIndex");
     final taxResidences = TaxResidence(id: '', country: countryInfo.code);
     _taxResidencesMap.update(formIndex, (currentTaxResidence) {
       return TaxResidence(id: currentTaxResidence.id, country: countryInfo.code);
@@ -88,25 +75,74 @@ class TaxState extends ChangeNotifier {
   }
 
   void addTaxForm() {
-    //Todo add a new tax form
-    print("addTaxForm");
-    _taxForms.add(1);
+    _taxForms.add(_taxForms.length);
     notifyListeners();
   }
 
   void removeTaxForm(int formIndex) {
-    _taxForms.removeAt(formIndex);
-    print("removeTaxForm");
+    _taxForms.remove(formIndex);
+    _taxResidencesMap.remove(formIndex);
+    _reOrderTaxFormsData();
+    _removeSelectedCountriesFromTheList();
     notifyListeners();
   }
 
   void addTaxId(String taxId, int formIndex) {
-    //Todo addTaxId
-    print("addTaxId :  $taxId, formIndex: $formIndex");
     final taxResidences = TaxResidence(id: taxId, country: '');
     _taxResidencesMap.update(formIndex, (currentTaxResidence) {
       return TaxResidence(id: taxId, country: currentTaxResidence.country);
     }, ifAbsent: () => taxResidences);
     notifyListeners();
+  }
+
+  setInformationAccuracyState(bool? isChecked) {
+    _isInformationAccuracyVerified = isChecked;
+    notifyListeners();
+  }
+
+  _reOrderTaxFormsData() {
+    Map<int, TaxResidence> newTaxResidencesMap = {};
+    List<TaxResidence> newTaxResidences = [];
+    _taxResidencesMap.forEach((key, value) {
+      newTaxResidences.add(value);
+    });
+    for (var x = 0; x < _taxForms.length; x++) {
+      _taxForms[x] = x;
+      newTaxResidencesMap[x] = newTaxResidences[x];
+    }
+    _taxResidencesMap = newTaxResidencesMap;
+  }
+
+  Future<void> submitTaxDataUpdates() async {
+    _isInformationAccuracyVerified ??= false;
+    _isSubmitButtonEnabled = _isInformationAccuracyVerified == true && _taxResidencesMap.isNotEmpty;
+    _taxResidencesMap.forEach((key, value) {
+      if (value.country.isEmpty || value.country.isEmpty) {
+        _isSubmitButtonEnabled = false;
+      }
+    });
+    notifyListeners();
+    if (_isSubmitButtonEnabled) {
+      updateTaxData(generateTaxModel());
+    }
+  }
+
+  TaxModel generateTaxModel() {
+    TaxModel tax;
+    List<TaxResidenceModel> secondaryTaxResidences = [];
+    _taxResidencesMap.forEach((key, value) {
+      if (key != 0) {
+        secondaryTaxResidences.add(TaxResidenceModel(id: value.id, country: value.country));
+      }
+    });
+    tax = TaxModel(
+      usTaxId: null,
+      usPerson: null,
+      primaryTaxResidence: TaxResidenceModel(id: _taxResidencesMap[0]!.id, country: _taxResidencesMap[0]!.country),
+      secondaryTaxResidence: secondaryTaxResidences,
+      w9FileId: null,
+      w9File: null,
+    );
+    return tax;
   }
 }

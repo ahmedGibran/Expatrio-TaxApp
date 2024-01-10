@@ -47,7 +47,7 @@ class TaxModel extends Tax {
           (taxResidenceItem as TaxResidenceModel).toJson(),
       ],
       'w9FileId': w9FileId,
-      'w9File': (w9File as W9FileModel).toJson()
+      'w9File': w9File!=null?(w9File as W9FileModel).toJson():null
     };
   }
 }
