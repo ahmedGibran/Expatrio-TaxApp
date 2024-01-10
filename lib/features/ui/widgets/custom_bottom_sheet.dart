@@ -4,7 +4,9 @@ class CustomBottomSheet {
   final BuildContext context;
   final double heightFactor;
   final Widget child;
-  CustomBottomSheet({required this.context, this.heightFactor = 0.9, required this.child}) {
+  final EdgeInsets padding;
+  CustomBottomSheet(
+      {required this.context, this.heightFactor = 0.9, required this.child, this.padding = const EdgeInsets.all(32)}) {
     _showModalBottomSheet();
   }
   void _showModalBottomSheet() {
@@ -17,7 +19,7 @@ class CustomBottomSheet {
             child: Container(
               color: Colors.transparent,
               child: Container(
-                  padding: const EdgeInsets.all(32),
+                  padding: padding,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(50)),
