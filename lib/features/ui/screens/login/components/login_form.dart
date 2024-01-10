@@ -72,15 +72,7 @@ class _LoginFormState extends State<LoginForm> {
                 textInputAction: TextInputAction.done,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: !authState.passwordVisible,
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Theme.of(context).colors.primary),
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  ),
-                  enabledBorder: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                  ),
+                decoration: Constant.kInputDecoration.copyWith(
                   suffixIcon: IconButton(
                     icon: Icon(
                       authState.passwordVisible ? Icons.visibility_off : Icons.visibility,
