@@ -16,52 +16,54 @@ class TaxBody extends StatelessWidget {
         builder: (context, taxState, _) {
           return Padding(
             padding: const EdgeInsets.all(48),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(width: 180, child: SvgPicture.asset(kCryingGirlSvg)),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: 210,
-                  child: Text(
-                    getTranslatedValue(context, 'empty_tax_info_title'),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(width: 180, child: SvgPicture.asset(kCryingGirlSvg)),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: 210,
+                    child: Text(
+                      getTranslatedValue(context, 'empty_tax_info_title'),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: 200,
-                  child: Text(
-                    getTranslatedValue(context, 'empty_tax_info_subtitle'),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: 200,
+                    child: Text(
+                      getTranslatedValue(context, 'empty_tax_info_subtitle'),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: 250,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colors.primary),
-                    onPressed: () async {
-                      _showTaxDataInoutFields(context);
-                    },
-                    child: Container(
-                      height: 32,
-                      width: MediaQuery.of(context).size.width,
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                      ),
-                      child: Text(
-                        getTranslatedValue(context, 'empty_tax_info_action').toUpperCase(),
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: 250,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colors.primary),
+                      onPressed: () async {
+                        _showTaxDataInoutFields(context);
+                      },
+                      child: Container(
+                        height: 32,
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                        ),
+                        child: Text(
+                          getTranslatedValue(context, 'empty_tax_info_action').toUpperCase(),
+                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:expatrio_tax_task/core/core.dart';
 import 'package:expatrio_tax_task/features/features.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +8,6 @@ class Constant {
   var authModel = getIt.get<AuthModel>();
 
   String endPoint(String endPoint) {
-    print("myAppModel : ${authModel.runtimeType}");
-    print("myAppModel.user. : ${authModel.accessToken.toString()}");
     late String url;
     if (endPoint.isNotEmpty) {
       url = _uRL + endPoint.replaceAll(':id', '${authModel.userID}');
