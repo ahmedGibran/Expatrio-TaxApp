@@ -250,6 +250,7 @@ class TaxBody extends StatelessWidget {
   void _showTaxCountriesBottomSheet(BuildContext context, int index) {
     CustomBottomSheet(
         context: context,
+        padding: const EdgeInsets.all(0),
         child: Consumer<TaxState>(
           builder: (context, taxState, _) => ListView(
             children: <Widget>[
