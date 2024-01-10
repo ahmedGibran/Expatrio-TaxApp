@@ -96,66 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                       ? () async {
                           await authState.login();
                           if (authState.state == AuthProviderState.success) {
-                            showModalBottomSheet<void>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Container(
-                                  color: Colors.transparent,
-                                  child: Container(
-                                    height: 300,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: const BorderRadius.all(Radius.circular(50)),
-                                    ),
-                                    child: Center(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.check_circle,
-                                            color: Theme.of(context).colors.primary,
-                                            size: 80,
-                                          ),
-                                          const SizedBox(height: 16),
-                                          Text(
-                                            getTranslatedValue(context, 'successful_login_title'),
-                                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                          ),
-                                          const SizedBox(height: 16),
-                                          Text(getTranslatedValue(context, 'successful_login__subtitle')),
-                                          const SizedBox(height: 16),
-                                          ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Theme.of(context).colors.primary,
-                                              ),
-                                              onPressed: () async {
-                                                Navigator.pop(context);
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(builder: (context) => const TaxScreen()),
-                                                );
-                                              },
-                                              child: Container(
-                                                height: 24,
-                                                width: 250,
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  color: Theme.of(context).colors.primary,
-                                                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                                                ),
-                                                child: Text(
-                                                  getTranslatedValue(context, 'got_it__action'),
-                                                  style: const TextStyle(color: Colors.white, fontSize: 16),
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
+                            _showSuccessfulLoginBottomSheet();
                           }
                         }
                       : null,
@@ -187,5 +128,55 @@ class _LoginFormState extends State<LoginForm> {
         );
       },
     );
+  }
+
+  void _showSuccessfulLoginBottomSheet() {
+    CustomBottomSheet(
+        context: context,
+        heightFactor: 0.4,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.check_circle,
+                color: Theme.of(context).colors.primary,
+                size: 80,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                getTranslatedValue(context, 'successful_login_title'),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              Text(getTranslatedValue(context, 'successful_login__subtitle')),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colors.primary,
+                  ),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const TaxScreen()),
+                    );
+                  },
+                  child: Container(
+                    height: 24,
+                    width: 250,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colors.primary,
+                      borderRadius: const BorderRadius.all(Radius.circular(100)),
+                    ),
+                    child: Text(
+                      getTranslatedValue(context, 'got_it__action'),
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  )),
+            ],
+          ),
+        ));
   }
 }

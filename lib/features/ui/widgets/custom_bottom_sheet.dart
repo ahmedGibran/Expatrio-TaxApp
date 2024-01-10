@@ -13,7 +13,7 @@ class CustomBottomSheet {
       isScrollControlled: true,
       builder: (BuildContext context) {
         return FractionallySizedBox(
-            heightFactor: 0.9,
+            heightFactor: heightFactor,
             child: Container(
               color: Colors.transparent,
               child: Container(
