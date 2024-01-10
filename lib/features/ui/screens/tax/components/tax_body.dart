@@ -74,108 +74,108 @@ class TaxBody extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return Consumer<TaxState>(
-            builder: (context, taxState, _) => FractionallySizedBox(
-                  heightFactor: 0.9,
-                  child: Container(
-                    color: Colors.transparent,
-                    child: Container(
-                      padding: const EdgeInsets.all(32),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                      ),
-                      child: Center(
-                        child: ListView(
-                          children: <Widget>[
-                            const SizedBox(height: 16),
-                            Text(
-                              getTranslatedValue(context, 'declaration_financial_info').toUpperCase(),
-                              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 16),
-                            for (int formIndex = 0; formIndex < taxState.taxForms.length; formIndex++)
-                              _buildTaxForm(context, formIndex),
-                            const SizedBox(height: 16),
-                            InkWell(
-                              onTap: () {
-                                taxState.addTaxForm();
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(Icons.add, color: Theme.of(context).colors.primary),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    getTranslatedValue(context, 'add_another').toUpperCase(),
-                                    style: TextStyle(fontSize: 16, color: Theme.of(context).colors.primary),
-                                  ),
-                                ],
+        return FractionallySizedBox(
+            heightFactor: 0.9,
+            child: Container(
+              color: Colors.transparent,
+              child: Container(
+                padding: const EdgeInsets.all(32),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                ),
+                child: Consumer<TaxState>(
+                  builder: (context, taxState, _) => Center(
+                    child: ListView(
+                      children: <Widget>[
+                        const SizedBox(height: 16),
+                        Text(
+                          getTranslatedValue(context, 'declaration_financial_info').toUpperCase(),
+                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        for (int formIndex = 0; formIndex < taxState.taxForms.length; formIndex++)
+                          _buildTaxForm(context, formIndex),
+                        const SizedBox(height: 16),
+                        InkWell(
+                          onTap: () {
+                            taxState.addTaxForm();
+                          },
+                          child: Row(
+                            children: [
+                              Icon(Icons.add, color: Theme.of(context).colors.primary),
+                              const SizedBox(width: 4),
+                              Text(
+                                getTranslatedValue(context, 'add_another').toUpperCase(),
+                                style: TextStyle(fontSize: 16, color: Theme.of(context).colors.primary),
                               ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Checkbox(
+                              checkColor: Colors.white,
+                              activeColor: Theme.of(context).colors.primary,
+                              side: BorderSide(
+                                color: taxState.isInformationAccuracyVerified == false
+                                    ? Colors.red
+                                    : Theme.of(context).colors.primary,
+                                width: 1.5,
+                              ),
+                              value: taxState.isInformationAccuracyVerified ?? false,
+                              onChanged: (bool? isChecked) {
+                                taxState.setInformationAccuracyState(isChecked);
+                              },
                             ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                Checkbox(
-                                  checkColor: Colors.white,
-                                  activeColor: Theme.of(context).colors.primary,
-                                  side: BorderSide(
-                                    color: taxState.isInformationAccuracyVerified == false
-                                        ? Colors.red
-                                        : Theme.of(context).colors.primary,
-                                    width: 1.5,
-                                  ),
-                                  value: taxState.isInformationAccuracyVerified ?? false,
-                                  onChanged: (bool? isChecked) {
-                                    taxState.setInformationAccuracyState(isChecked);
-                                  },
-                                ),
-                                const SizedBox(width: 2),
-                                Text(
-                                  getTranslatedValue(context, 'checkbox_title'),
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              ],
+                            const SizedBox(width: 2),
+                            Text(
+                              getTranslatedValue(context, 'checkbox_title'),
+                              style: TextStyle(fontSize: 15),
                             ),
-                            const SizedBox(height: 16),
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Theme.of(context).colors.primary,
-                                ),
-                                onPressed: () async {
-                                  await taxState.submitTaxDataUpdates();
-                                  if (taxState.isSubmitButtonEnabled) {
-                                    Navigator.pop(context);
-                                  }
-                                },
-                                child: Container(
-                                  height: 24,
-                                  width: 250,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).colors.primary,
-                                    borderRadius: const BorderRadius.all(Radius.circular(100)),
-                                  ),
-                                  child: taxState.state == TaxProviderState.loading
-                                      ? SizedBox(
-                                          height: 24,
-                                          width: 24,
-                                          child: CircularProgressIndicator(
-                                            backgroundColor: Colors.white,
-                                            color: Theme.of(context).colors.primary,
-                                          ),
-                                        )
-                                      : Text(
-                                          getTranslatedValue(context, 'save'),
-                                          style: const TextStyle(color: Colors.white, fontSize: 16),
-                                        ),
-                                )),
                           ],
                         ),
-                      ),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context).colors.primary,
+                            ),
+                            onPressed: () async {
+                              await taxState.submitTaxDataUpdates();
+                              if (taxState.isSubmitButtonEnabled) {
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: Container(
+                              height: 24,
+                              width: 250,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colors.primary,
+                                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                              ),
+                              child: taxState.state == TaxProviderState.loading
+                                  ? SizedBox(
+                                      height: 24,
+                                      width: 24,
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.white,
+                                        color: Theme.of(context).colors.primary,
+                                      ),
+                                    )
+                                  : Text(
+                                      getTranslatedValue(context, 'save'),
+                                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                                    ),
+                            )),
+                      ],
                     ),
                   ),
-                ));
+                ),
+              ),
+            ));
       },
     );
   }
