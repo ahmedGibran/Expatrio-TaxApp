@@ -87,3 +87,11 @@ All the business logic of our application in this directory, it represents the d
 each containing the domain specific logic. Since each layer exists independently, that makes it easier to unit test. The communication between UI and data layer is handled by using central repository.
 
 ### Screenshots
+![Screenshot_20240110_065720](https://github.com/ahmedGibran/Expatrio-TaxApp-Task/assets/51888694/6ee1799f-b5d3-426c-a40c-b1399e1d5fec)
+![Screenshot_20240110_065748](https://github.com/ahmedGibran/Expatrio-TaxApp-Task/assets/51888694/79b87177-8d34-48a9-b1cc-8e7c00f933e1)
+![Screenshot_20240110_065914](https://github.com/ahmedGibran/Expatrio-TaxApp-Task/assets/51888694/07bcc0c0-311f-4fde-9219-09022b4a64f6)
+![Screenshot_20240110_065850](https://github.com/ahmedGibran/Expatrio-TaxApp-Task/assets/51888694/d7fcf64b-c55d-42fe-8f9b-77d9d0e84c04)
+![Screenshot_20240110_065825](https://github.com/ahmedGibran/Expatrio-TaxApp-Task/assets/51888694/be184142-ed78-42da-9a65-830570564a5d)
+![Screenshot_20240110_065720](https://github.com/ahmedGibran/Expatrio-TaxApp-Task/assets/51888694/5be481b3-1925-47d6-bb39-308b63a1c8fe)
+
+
