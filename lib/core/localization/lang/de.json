@@ -1,4 +1,23 @@
 {
-  "login": "Login"
-
+  "login": "Login",
+  "help": "Help",
+  "save": "Save",
+  "remove": "- Remove",
+  "country": "Country",
+  "search_for_country": "Search for Country",
+  "add_another": "Add Another",
+  "trying_to_login_note": "Trying to Login...",
+  "email_label": "Email Address",
+  "password_label": "Password",
+  "successful_login_title": "Successful Login",
+  "successful_login__subtitle": "You will be redirected to your dashboard",
+  "got_it__action": "Got it",
+  "empty_tax_info_title": "Uh-Oh!",
+  "empty_tax_info_subtitle": "We need your Tax data in order dor you to access your account",
+  "empty_tax_info_action": "Update your tax Data",
+  "primary_country_drop_down_hint": "Which country serves as your primary Tax residency?*",
+  "country_drop_down_hint": "WDo you have other Tax residences?*",
+  "tax_number_hint": "Tax identification number*",
+  "checkbox_title": "I confirm above tax residency and US self-\ndeclaration is true and accurate",
+  "declaration_financial_info": "Declaration of financial information"
 }
