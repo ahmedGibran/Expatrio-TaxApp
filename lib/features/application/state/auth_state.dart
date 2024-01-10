@@ -29,8 +29,8 @@ class AuthState extends ChangeNotifier {
       Helper.validatePassword(password) == null;
 
   AuthState({required this.authUseCases}) {
-    _emailTextController = TextEditingController(text: 'tito+bs792@expatrio.com');
-    _passwordTextController = TextEditingController(text: 'nemampojma');
+    _emailTextController = TextEditingController();
+    _passwordTextController = TextEditingController();
     _emailTextController.addListener(_listenToEmailTextChange);
     _passwordTextController.addListener(_listenToPasswordTextChange);
   }
