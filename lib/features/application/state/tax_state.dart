@@ -6,6 +6,7 @@ enum TaxProviderState { init, loading, error, success }
 
 class TaxState extends ChangeNotifier {
   late final TaxUseCases taxUseCases;
+  late final TextEditingController _searchTextEditingController;
   Map<int, TaxResidence> _taxResidencesMap = {};
   final List<int> _taxForms = [];
   TaxProviderState _state = TaxProviderState.init;
@@ -20,8 +21,11 @@ class TaxState extends ChangeNotifier {
   bool? get isInformationAccuracyVerified => _isInformationAccuracyVerified;
   List<CountryInfo> get countryInfos => _countryInfos;
   List<int> get taxForms => _taxForms;
+  TextEditingController get searchTextEditingController => _searchTextEditingController;
 
   TaxState({required this.taxUseCases}) {
+    _searchTextEditingController = TextEditingController();
+    _searchTextEditingController.addListener(_listenToSearchTextChange);
     _countryInfos = [...CountriesConstants.countryInfos];
     _taxForms.add(0);
     _getTaxData();
@@ -144,5 +148,15 @@ class TaxState extends ChangeNotifier {
       w9File: null,
     );
     return tax;
+  }
+
+  void _listenToSearchTextChange() {
+    final search = _searchTextEditingController.text;
+    _removeSelectedCountriesFromTheList();
+    if (search.isEmpty) {
+    } else {
+      _countryInfos = [..._countryInfos.where((element) => element.label.toLowerCase().contains(search)).toList()];
+    }
+    notifyListeners();
   }
 }

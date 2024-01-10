@@ -41,7 +41,6 @@ class AuthState extends ChangeNotifier {
     notifyListeners();
     final result = await authUseCases.login(_email, _password);
     result?.fold((l) {
-      print("left: ${l}");
       _state = AuthProviderState.error;
     }, (r) {
       getIt<AuthModel>().accessToken = r.accessToken;
