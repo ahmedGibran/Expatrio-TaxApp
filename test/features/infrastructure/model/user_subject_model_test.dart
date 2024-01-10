@@ -19,8 +19,7 @@ void main() {
 
   test("fromJson", () async {
     // get data from local json file
-    final Map<String, dynamic> mapData =
-        json.decode(fixture("cached_user_subject_data.json"));
+    final Map<String, dynamic> mapData = json.decode(fixture("cached_user_subject_data.json"));
     UserSubjectModel result;
     // result will take the mappedData from the user subject json file
     result = UserSubjectModel.fromJson(mapData);

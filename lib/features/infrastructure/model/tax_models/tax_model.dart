@@ -28,8 +28,7 @@ class TaxModel extends Tax {
     return TaxModel(
       usTaxId: jsonData['usTaxId'],
       usPerson: jsonData['usPerson'],
-      primaryTaxResidence:
-          TaxResidenceModel.fromJson(jsonData['primaryTaxResidence']),
+      primaryTaxResidence: TaxResidenceModel.fromJson(jsonData['primaryTaxResidence']),
       secondaryTaxResidence: sTaxResidences,
       w9FileId: jsonData['w9FileId'],
       w9File: W9FileModel.fromJson(jsonData['w9File']),
@@ -40,14 +39,12 @@ class TaxModel extends Tax {
     return {
       'usTaxId': usTaxId,
       'usPerson': usPerson,
-      'primaryTaxResidence':
-          (primaryTaxResidence as TaxResidenceModel).toJson(),
+      'primaryTaxResidence': (primaryTaxResidence as TaxResidenceModel).toJson(),
       'secondaryTaxResidence': [
-        for (var taxResidenceItem in secondaryTaxResidence)
-          (taxResidenceItem as TaxResidenceModel).toJson(),
+        for (var taxResidenceItem in secondaryTaxResidence) (taxResidenceItem as TaxResidenceModel).toJson(),
       ],
       'w9FileId': w9FileId,
-      'w9File': w9File!=null?(w9File as W9FileModel).toJson():null
+      'w9File': w9File != null ? (w9File as W9FileModel).toJson() : null
     };
   }
 }

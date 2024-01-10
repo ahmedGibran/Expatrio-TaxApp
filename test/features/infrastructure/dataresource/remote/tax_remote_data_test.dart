@@ -22,23 +22,16 @@ void main() {
     void callSuccess200() {
       when(mockClient.get(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
-      )).thenAnswer((_) async => http.Response(
-              fixture('cached_tax_data.json'), 200, headers: {
-            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-          }));
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
+      )).thenAnswer((_) async => http.Response(fixture('cached_tax_data.json'), 200,
+          headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'}));
     }
 
     TaxModel tax = TaxModel(
         usPerson: false,
         usTaxId: null,
-        primaryTaxResidence:
-            const TaxResidenceModel(country: "AF", id: "1234567"),
-        secondaryTaxResidence: const [
-          TaxResidenceModel(country: "FR", id: "15236")
-        ],
+        primaryTaxResidence: const TaxResidenceModel(country: "AF", id: "1234567"),
+        secondaryTaxResidence: const [TaxResidenceModel(country: "FR", id: "15236")],
         w9FileId: 320459,
         w9File: W9FileModel(
             id: 320459,
@@ -55,16 +48,12 @@ void main() {
                 "https://dev-files.expatrio.com/FORM_W9_03c91726-b202-4ff7-bead-ea6fc0687b56.pdf?response-content-type=application/pdf&response-content-disposition=inline%3B+filename%3DFORM_W9_03c91726-b202-4ff7-bead-ea6fc0687b56.pdf&Expires=1704586427&Signature=HYp2XD1dIC-BAgD9HcwrHoZ3gFkdc0bsllFb2VrC6Kms-XbJaaa~vc2r8Dj0V~nf2SB7K1WHGCGrhL~AF4iubHco1iNYjnL-c1BmE7imZvowM4v~S4HFfiPu5v09RnmpA26VnpezHjp2w2JMeIdYGzhJFBcJgeJbWaSa6ekMIBKUlypu8DCZM4YeuUQWv8hzke0iyQQkhmiWdkqs~Bsw8F1KPihwmumH~R625RsUKyX7JTqDRNP3UGXd6G-f6XlTu7a6fhhSdY0pcPMFvYlEuFEixGfnClllTUHgBjYPpkeP9wehn4MwHdlQc92YlnbrU6IPfQ3QeX61FSknzaG3Jg__&Key-Pair-Id=APKAJU3M3ZIAQ775OZBQ",
             invalid: false));
 
-    test(
-        "should call getTaxData Method and statues code should be 200 (success)",
-        () async {
+    test("should call getTaxData Method and statues code should be 200 (success)", () async {
       callSuccess200();
       await taxRemoteDataImpl.getTaxData();
       verify(mockClient.get(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
       ));
     });
 
@@ -74,18 +63,12 @@ void main() {
       expect(result, tax);
     });
 
-    test(
-        "should throw exception when the statues code of http.get does not equal 200 (success)",
-        () async {
+    test("should throw exception when the statues code of http.get does not equal 200 (success)", () async {
       when(mockClient.get(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
-      )).thenAnswer((_) async => http.Response(
-              fixture('cached_tax_data.json'), 500, headers: {
-            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-          }));
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
+      )).thenAnswer((_) async => http.Response(fixture('cached_tax_data.json'), 500,
+          headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'}));
 
       final result = taxRemoteDataImpl.getTaxData;
       expect(() => result(), throwsA(const TypeMatcher<ServerException>()));
@@ -96,11 +79,8 @@ void main() {
     TaxModel tax = TaxModel(
         usPerson: false,
         usTaxId: null,
-        primaryTaxResidence:
-            const TaxResidenceModel(country: "AF", id: "1234567"),
-        secondaryTaxResidence: const [
-          TaxResidenceModel(country: "FR", id: "15236")
-        ],
+        primaryTaxResidence: const TaxResidenceModel(country: "AF", id: "1234567"),
+        secondaryTaxResidence: const [TaxResidenceModel(country: "FR", id: "15236")],
         w9FileId: 320459,
         w9File: W9FileModel(
             id: 320459,
@@ -120,48 +100,35 @@ void main() {
     void callSuccess200() {
       when(mockClient.put(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
         body: json.encode(tax.toJson()),
-      )).thenAnswer((_) async => http.Response('', 200, headers: {
-            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-          }));
+      )).thenAnswer((_) async =>
+          http.Response('', 200, headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'}));
     }
 
-    test(
-        "should call updateTaxData Method and statues code should be 200 (success)",
-        () async {
+    test("should call updateTaxData Method and statues code should be 200 (success)", () async {
       callSuccess200();
       await taxRemoteDataImpl.updateTaxData(tax);
       verify(mockClient.put(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
         body: json.encode(tax.toJson()),
       ));
     });
 
-    test("should call updateTaxData Method without any issues in the response",
-        () async {
+    test("should call updateTaxData Method without any issues in the response", () async {
       callSuccess200();
       final result = await taxRemoteDataImpl.updateTaxData(tax);
       expect(() => result, returnsNormally);
     });
 
-    test(
-        "should throw exception when the statues code of http.get does not equal 200 (success)",
-        () async {
+    test("should throw exception when the statues code of http.get does not equal 200 (success)", () async {
       when(mockClient.put(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
         body: json.encode(tax.toJson()),
-      )).thenAnswer((_) async => http.Response('', 500, headers: {
-            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-          }));
+      )).thenAnswer((_) async =>
+          http.Response('', 500, headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'}));
 
       final result = taxRemoteDataImpl.updateTaxData;
       expect(() => result(tax), throwsA(const TypeMatcher<ServerException>()));

@@ -2,7 +2,7 @@ import 'package:expatrio_tax_task/core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 //flutter test test/core/utils/constants/helper_test.dart
-void main(){
+void main() {
   group('Helper - Validators', () {
     test('validateEmail', () {
       var validation = Helper.validateEmail('');

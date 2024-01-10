@@ -23,16 +23,14 @@ class AuthRepositoryImpl extends AuthRepository {
         }
         return right(user!);
       } on ServerException {
-        return left(
-            const ServerFailure(message: 'Internal Server Error while login'));
+        return left(const ServerFailure(message: 'Internal Server Error while login'));
       }
     } else {
       try {
         final User? user = await authLocalData.getUserData();
         return right(user!);
       } on CacheException {
-        return left(
-            const CacheFailure(message: 'Internal Cache Error while login'));
+        return left(const CacheFailure(message: 'Internal Cache Error while login'));
       }
     }
   }

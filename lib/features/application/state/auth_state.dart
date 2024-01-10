@@ -22,16 +22,15 @@ class AuthState extends ChangeNotifier {
   TextEditingController get passwordTextController => _passwordTextController;
   AuthProviderState get state => _state;
 
-  bool get isSubmitEnabled => true;
-
-  // !Helper.isEmpty(email) &&
-  // Helper.validateEmail(email) == null &&
-  // !Helper.isEmpty(password) &&
-  // Helper.validatePassword(password) == null;
+  bool get isSubmitEnabled =>
+      !Helper.isEmpty(email) &&
+      Helper.validateEmail(email) == null &&
+      !Helper.isEmpty(password) &&
+      Helper.validatePassword(password) == null;
 
   AuthState({required this.authUseCases}) {
-    _emailTextController = TextEditingController(text: 'tito+bs792@expatrio.com');
-    _passwordTextController = TextEditingController(text: 'nemampojma');
+    _emailTextController = TextEditingController();
+    _passwordTextController = TextEditingController();
     _emailTextController.addListener(_listenToEmailTextChange);
     _passwordTextController.addListener(_listenToPasswordTextChange);
   }

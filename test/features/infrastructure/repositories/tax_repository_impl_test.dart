@@ -29,11 +29,8 @@ void main() {
     tax = Tax(
         usPerson: false,
         usTaxId: null,
-        primaryTaxResidence:
-            const TaxResidenceModel(country: "AF", id: "1234567"),
-        secondaryTaxResidence: const [
-          TaxResidenceModel(country: "FR", id: "15236")
-        ],
+        primaryTaxResidence: const TaxResidenceModel(country: "AF", id: "1234567"),
+        secondaryTaxResidence: const [TaxResidenceModel(country: "FR", id: "15236")],
         w9FileId: 320459,
         w9File: W9FileModel(
             id: 320459,
@@ -54,12 +51,10 @@ void main() {
   group("TaxRepositoryImpl test group when device is online", () {
     setUpAll(() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(mockTaxRemoteData.updateTaxData(tax))
-          .thenAnswer((_) async => returnsNormally);
+      when(mockTaxRemoteData.updateTaxData(tax)).thenAnswer((_) async => returnsNormally);
       when(mockTaxRemoteData.getTaxData()).thenAnswer((_) async => tax);
       when(mockTaxLocalData.getTaxData()).thenAnswer((_) async => tax);
-      when(mockTaxLocalData.cacheTaxData(tax))
-          .thenAnswer((_) async => returnsNormally);
+      when(mockTaxLocalData.cacheTaxData(tax)).thenAnswer((_) async => returnsNormally);
     });
 
     test("Should to check the device is online or not", () async {
@@ -73,8 +68,7 @@ void main() {
       verify(mockTaxLocalData.cacheTaxData(tax));
     });
 
-    test("should call cache tax data when tax remote data is updated",
-        () async {
+    test("should call cache tax data when tax remote data is updated", () async {
       await taxRepositoryImpl.updateTaxData(tax);
       verify(taxRepositoryImpl.updateTaxData(tax));
       verify(mockTaxLocalData.cacheTaxData(tax));
@@ -85,8 +79,7 @@ void main() {
     setUpAll(() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       when(mockTaxLocalData.getTaxData()).thenAnswer((_) async => tax);
-      when(mockTaxLocalData.cacheTaxData(tax))
-          .thenAnswer((_) async => returnsNormally);
+      when(mockTaxLocalData.cacheTaxData(tax)).thenAnswer((_) async => returnsNormally);
     });
 
     test("Should to check the device is online or not", () async {
@@ -94,21 +87,16 @@ void main() {
       verify(mockNetworkInfo.isConnected);
     });
 
-    test(
-        "should call cache tax data when fetching remote data is not possible because of lost connection",
-        () async {
+    test("should call cache tax data when fetching remote data is not possible because of lost connection", () async {
       await taxRepositoryImpl.getTaxData();
       verify(taxRepositoryImpl.getTaxData());
       verify(mockTaxLocalData.getTaxData());
     });
 
-    test(
-        "should updateTaxData return a serverFailure error with No internet connection message",
-        () async {
+    test("should updateTaxData return a serverFailure error with No internet connection message", () async {
       final result = await taxRepositoryImpl.updateTaxData(tax);
       verify(taxRepositoryImpl.updateTaxData(tax));
-      expect(
-          result, const Left(ServerFailure(message: 'No internet connection')));
+      expect(result, const Left(ServerFailure(message: 'No internet connection')));
     });
   });
 }
