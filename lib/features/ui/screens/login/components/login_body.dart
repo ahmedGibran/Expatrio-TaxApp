@@ -23,7 +23,7 @@ class LoginBody extends StatelessWidget {
               ),
             ),
             Positioned.fill(child: Container(color: Colors.white.withOpacity(0.8))),
-            Positioned.fill(child: const LoginForm()),
+            const Positioned.fill(child: LoginForm()),
           ],
         ),
       ),
