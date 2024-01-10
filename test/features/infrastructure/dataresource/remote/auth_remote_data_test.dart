@@ -24,15 +24,10 @@ void main() {
     void callSuccess200() {
       when(mockClient.post(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
-        body: json
-            .encode(<String, String>{'email': 'email', 'password': 'password'}),
-      )).thenAnswer((_) async => http.Response(
-              fixture('cached_user_data.json'), 200, headers: {
-            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-          }));
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
+        body: json.encode(<String, String>{'email': 'email', 'password': 'password'}),
+      )).thenAnswer((_) async => http.Response(fixture('cached_user_data.json'), 200,
+          headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'}));
     }
 
     UserModel user = UserModel(
@@ -54,17 +49,13 @@ void main() {
         ),
         maxAgeSeconds: 3600);
 
-    test("should call login Method and statues code should be 200 (success)",
-        () async {
+    test("should call login Method and statues code should be 200 (success)", () async {
       callSuccess200();
       await authRemoteDataImpl.login('email', 'password');
       verify(mockClient.post(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
-        body: json
-            .encode(<String, String>{'email': 'email', 'password': 'password'}),
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
+        body: json.encode(<String, String>{'email': 'email', 'password': 'password'}),
       ));
     });
 
@@ -74,24 +65,16 @@ void main() {
       expect(result, user);
     });
 
-    test(
-        "should throw exception when the statues code of http.get does not equal 200 (success)",
-        () async {
+    test("should throw exception when the statues code of http.get does not equal 200 (success)", () async {
       when(mockClient.post(
         any,
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-        },
-        body: json
-            .encode(<String, String>{'email': 'email', 'password': 'password'}),
-      )).thenAnswer((_) async => http.Response(
-              fixture('cached_user_data.json'), 500, headers: {
-            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'
-          }));
+        headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'},
+        body: json.encode(<String, String>{'email': 'email', 'password': 'password'}),
+      )).thenAnswer((_) async => http.Response(fixture('cached_user_data.json'), 500,
+          headers: {HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8'}));
 
       final result = authRemoteDataImpl.login;
-      expect(() => result('email', 'password'),
-          throwsA(const TypeMatcher<ServerException>()));
+      expect(() => result('email', 'password'), throwsA(const TypeMatcher<ServerException>()));
     });
   });
 }

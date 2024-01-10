@@ -20,12 +20,5 @@ class Tax extends Equatable {
 
   // The list of properties that will be used to determine whether two instances are equal, supported from Equatable
   @override
-  List<Object?> get props => [
-        usTaxId,
-        usPerson,
-        primaryTaxResidence,
-        secondaryTaxResidence,
-        w9FileId,
-        w9File
-      ];
+  List<Object?> get props => [usTaxId, usPerson, primaryTaxResidence, secondaryTaxResidence, w9FileId, w9File];
 }

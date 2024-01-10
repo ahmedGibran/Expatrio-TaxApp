@@ -23,16 +23,14 @@ class TaxRepositoryImpl extends TaxRepository {
         }
         return right(tax!);
       } on ServerException {
-        return left(const ServerFailure(
-            message: 'Internal Server Error while getTaxData'));
+        return left(const ServerFailure(message: 'Internal Server Error while getTaxData'));
       }
     } else {
       try {
         final Tax? tax = await taxLocalData.getTaxData();
         return right(tax!);
       } on CacheException {
-        return left(const CacheFailure(
-            message: 'Internal Cache Error while getTaxData'));
+        return left(const CacheFailure(message: 'Internal Cache Error while getTaxData'));
       }
     }
   }
@@ -46,8 +44,7 @@ class TaxRepositoryImpl extends TaxRepository {
         await taxLocalData.cacheTaxData(tax);
         return right(null);
       } on ServerException {
-        return left(const ServerFailure(
-            message: 'Internal Server Error while updateTaxData'));
+        return left(const ServerFailure(message: 'Internal Server Error while updateTaxData'));
       }
     } else {
       return left(const ServerFailure(message: 'No internet connection'));

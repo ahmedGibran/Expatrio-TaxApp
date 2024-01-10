@@ -48,11 +48,9 @@ void main() {
   group("AuthRepositoryImpl test group when device is online", () {
     setUpAll(() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-      when(mockAuthRemoteData.login('email', 'password'))
-          .thenAnswer((_) async => user);
+      when(mockAuthRemoteData.login('email', 'password')).thenAnswer((_) async => user);
       when(mockAuthLocalData.getUserData()).thenAnswer((_) async => user);
-      when(mockAuthLocalData.cacheUserData(user))
-          .thenAnswer((_) async => returnsNormally);
+      when(mockAuthLocalData.cacheUserData(user)).thenAnswer((_) async => returnsNormally);
     });
 
     test("Should to check the device is online or not", () async {

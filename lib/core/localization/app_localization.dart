@@ -12,20 +12,17 @@ class AppLocalization {
 
   Map<String, String> _localizedValues = HashMap();
   Future load() async {
-    String jsonStringValues = await rootBundle
-        .loadString("lib/core/localization/lang/${locale.languageCode}.json");
+    String jsonStringValues = await rootBundle.loadString("lib/core/localization/lang/${locale.languageCode}.json");
 
     Map<String, dynamic> mappedJson = json.decode(jsonStringValues);
-    _localizedValues =
-        mappedJson.map((key, value) => MapEntry(key, value.toString()));
+    _localizedValues = mappedJson.map((key, value) => MapEntry(key, value.toString()));
   }
 
   String getTranslatedValue(String key) {
     return _localizedValues[key] ?? '';
   }
 
-  static const LocalizationsDelegate<AppLocalization> delegate =
-      _AppLocalizationDelegate();
+  static const LocalizationsDelegate<AppLocalization> delegate = _AppLocalizationDelegate();
 }
 
 class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

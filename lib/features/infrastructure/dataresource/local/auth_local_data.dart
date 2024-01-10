@@ -15,7 +15,7 @@ const String CACHED_USER_DATA = "CACHED_USER_DATA";
 class AuthLocalDataImpl extends AuthLocalData {
   final FlutterSecureStorage storage;
   User? _user;
-  User? get user =>_user;
+  User? get user => _user;
   AuthLocalDataImpl({required this.storage});
 
   @override

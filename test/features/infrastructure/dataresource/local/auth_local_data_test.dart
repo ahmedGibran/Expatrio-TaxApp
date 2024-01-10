@@ -37,19 +37,13 @@ void main() {
         ),
         maxAgeSeconds: 3600);
 
-    test(
-        "should call cacheUserData Method and store the user obj as string",
-        () async {
+    test("should call cacheUserData Method and store the user obj as string", () async {
       await authLocalDataImpl.cacheUserData(user);
-      verify(mockStorage.write(
-          key: CACHED_USER_DATA, value: jsonEncode(user.toJson())));
+      verify(mockStorage.write(key: CACHED_USER_DATA, value: jsonEncode(user.toJson())));
     });
 
-    test(
-        "should call getUserData Method and return the stored user obj",
-        () async {
-      when(mockStorage.read(key: CACHED_USER_DATA))
-          .thenAnswer((_) async => jsonEncode(user.toJson()));
+    test("should call getUserData Method and return the stored user obj", () async {
+      when(mockStorage.read(key: CACHED_USER_DATA)).thenAnswer((_) async => jsonEncode(user.toJson()));
       final result = await authLocalDataImpl.getUserData();
       verify(mockStorage.read(key: CACHED_USER_DATA));
       expect(result, user);

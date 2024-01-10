@@ -23,8 +23,7 @@ void main() {
 
   test("fromJson", () async {
     // get data from local json file
-    final Map<String, dynamic> mapData =
-        json.decode(fixture("cached_w9_file_data.json"));
+    final Map<String, dynamic> mapData = json.decode(fixture("cached_w9_file_data.json"));
     W9FileModel result;
     // result will take the mappedData from the W9File json file
     result = W9FileModel.fromJson(mapData);

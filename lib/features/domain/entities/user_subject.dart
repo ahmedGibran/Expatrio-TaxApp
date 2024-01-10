@@ -23,6 +23,5 @@ class UserSubject extends Equatable {
 
   // The list of properties that will be used to determine whether two instances are equal, supported from Equatable
   @override
-  List<Object?> get props =>
-      [userId, userUuid, firstName, lastName, fullName, email, role, isAdmin];
+  List<Object?> get props => [userId, userUuid, firstName, lastName, fullName, email, role, isAdmin];
 }

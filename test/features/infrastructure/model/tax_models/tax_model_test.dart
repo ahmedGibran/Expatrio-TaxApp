@@ -9,11 +9,8 @@ void main() {
   TaxModel tax = TaxModel(
       usPerson: false,
       usTaxId: null,
-      primaryTaxResidence:
-          const TaxResidenceModel(country: "AF", id: "1234567"),
-      secondaryTaxResidence: const [
-        TaxResidenceModel(country: "FR", id: "15236")
-      ],
+      primaryTaxResidence: const TaxResidenceModel(country: "AF", id: "1234567"),
+      secondaryTaxResidence: const [TaxResidenceModel(country: "FR", id: "15236")],
       w9FileId: 320459,
       w9File: W9FileModel(
           id: 320459,
@@ -32,8 +29,7 @@ void main() {
 
   test("fromJson", () async {
     // get data from local json file
-    final Map<String, dynamic> mapData =
-        json.decode(fixture("cached_tax_data.json"));
+    final Map<String, dynamic> mapData = json.decode(fixture("cached_tax_data.json"));
     TaxModel result;
     // result will take the mappedData from the tax json file
     result = TaxModel.fromJson(mapData);
