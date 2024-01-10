@@ -69,6 +69,14 @@ class TaxScreen extends StatelessWidget {
                                             child: Center(
                                               child: ListView(
                                                 children: <Widget>[
+                                                  const SizedBox(height: 16),
+                                                  Text(
+                                                    getTranslatedValue(context, 'declaration_financial_info')
+                                                        .toUpperCase(),
+                                                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  const SizedBox(height: 16),
                                                   for (int formIndex = 0;
                                                       formIndex < taxState.taxForms.length;
                                                       formIndex++)
@@ -214,6 +222,39 @@ class TaxScreen extends StatelessWidget {
                                 ),
                                 child: ListView(
                                   children: <Widget>[
+                                    Container(
+                                      height: 48,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).colors.primary,
+                                        borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          getTranslatedValue(context, 'country'),
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      child: TextFormField(
+                                        textAlignVertical: TextAlignVertical.center,
+                                        controller: taxState.searchTextEditingController,
+                                        style: const TextStyle(fontSize: 16),
+                                        textInputAction: TextInputAction.done,
+                                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                                        decoration: Constant.kInputDecoration
+                                            .copyWith(hintText: getTranslatedValue(context, 'search_for_country')),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 16),
                                     for (int countryIndex = 0;
                                         countryIndex < taxState.countryInfos.length;
                                         countryIndex++)
@@ -270,16 +311,7 @@ class TaxScreen extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
             textInputAction: TextInputAction.done,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).colors.primary),
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-              ),
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-            ),
+            decoration: Constant.kInputDecoration,
             onChanged: (taxId) {
               taxState.addTaxId(taxId, index);
             },

@@ -59,16 +59,7 @@ class LoginScreen extends StatelessWidget {
                           style: const TextStyle(fontSize: 16),
                           textInputAction: TextInputAction.done,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Theme.of(context).colors.primary),
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
-                            ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                            ),
-                          ),
+                          decoration: Constant.kInputDecoration,
                           onChanged: (value) {
                             authState.emailTextController.text = value;
                           },
