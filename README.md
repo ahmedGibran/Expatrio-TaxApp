@@ -15,21 +15,21 @@ Built with flutter Channel stable --version = 3.16.5,
 ### How to run to Test?
 Please run these command lines ... :
 
-flutter test test/core/network/network_info_impl_test.dart
-flutter test test/core/utils/constants/helper_test.dart
-flutter test test/features/domain/usecases/auth_use_cases_test.dart
-flutter test test/features/domain/usecases/tax_use_cases_test.dart 
-flutter test test/features/infrastructure/dataresource/local/auth_local_data_test.dart
-flutter test test/features/infrastructure/dataresource/local/tax_local_data_test.dart
-flutter test test/features/infrastructure/dataresource/remote/auth_remote_data_test.dart
-flutter test test/features/infrastructure/dataresource/remote/tax_remote_data_test.dart 
-flutter test test/features/infrastructure/model/tax_models/tax_model_test.dart
-flutter test test/features/infrastructure/model/tax_models/tax_residence_model_test.dart
-flutter test test/features/infrastructure/model/tax_models/w9_file_model_test.dart
-flutter test test/features/infrastructure/model/user_model_test.dart
-flutter test test/features/infrastructure/model/user_subject_model_test.dart
-flutter test test/features/infrastructure/repositories/auth_repository_impl_test.dart
-flutter test test/features/infrastructure/repositories/tax_repository_impl_test.dart
+- flutter test test/core/network/network_info_impl_test.dart
+- flutter test test/core/utils/constants/helper_test.dart
+- flutter test test/features/domain/usecases/auth_use_cases_test.dart
+- flutter test test/features/domain/usecases/tax_use_cases_test.dart 
+- flutter test test/features/infrastructure/dataresource/local/auth_local_data_test.dart
+- flutter test test/features/infrastructure/dataresource/local/tax_local_data_test.dart
+- flutter test test/features/infrastructure/dataresource/remote/auth_remote_data_test.dart
+- flutter test test/features/infrastructure/dataresource/remote/tax_remote_data_test.dart 
+- flutter test test/features/infrastructure/model/tax_models/tax_model_test.dart
+- flutter test test/features/infrastructure/model/tax_models/tax_residence_model_test.dart
+- flutter test test/features/infrastructure/model/tax_models/w9_file_model_test.dart
+- flutter test test/features/infrastructure/model/user_model_test.dart
+- flutter test test/features/infrastructure/model/user_subject_model_test.dart
+- flutter test test/features/infrastructure/repositories/auth_repository_impl_test.dart
+- flutter test test/features/infrastructure/repositories/tax_repository_impl_test.dart
 
 
 ### Libraries & Tools Used
@@ -43,7 +43,7 @@ flutter test test/features/infrastructure/repositories/tax_repository_impl_test.
 * [Equality Comparisons](https://pub.dev/packages/equatable)
 * [internet connection checker](https://pub.dev/packages/internet_connection_checker)
 * [dartz](https://pub.dev/packages/dartz)
-* [Mocks](hhttps://pub.dev/packages/mockito)
+* [Mocks](https://pub.dev/packages/mockito)
 * [Dependency Injection](https://github.com/fluttercommunity/get_it)
 
 ### Folder Structure
@@ -58,7 +58,7 @@ flutter-app/
 |- test
 ```
 
-Here is the folder structure we have been using in this project
+Here is the folder structure I have been using in this project
 
 ```
 lib/
